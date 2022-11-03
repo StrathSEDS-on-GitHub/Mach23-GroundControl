@@ -15,7 +15,7 @@ export default function handler(
 ) {
   const { id } = req.query
 
-  let toreturn: number = (Date.now() - now)/1000;
+  let toreturn: number = Math.floor((Date.now() - now)/100)/10;
 
   res.status(200).json({ message: `data ${toreturn}` });
 }
