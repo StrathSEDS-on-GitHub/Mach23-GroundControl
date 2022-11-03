@@ -1,22 +1,40 @@
 import Head from 'next/head'
+import useSWR from 'swr'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { readSync } from 'fs'
 
-async function TestAPI(): Promise<String> {
-  let data: String = "NO DATA";
-  
-  let resp = await fetch('http://localhost:3000/api/test')
-  let json = await resp.json()
-  data = json.message
-  return data;
+const dataapi = "localhost:3000/api/test"
+
+const fetcher = async (url: string) => {
+  const res = await fetch(url)
+
+  if (!res.ok) {
+    console.log("API> Error: " + res.statusText)
+    const error = new Error(res.statusText);
+    throw error;
+  }
+
+  return res.json();
 }
 
-export default async function Home() {
-  const test = await TestAPI()
+function GetData(id: string) {
+  const { data, error } = useSWR(`/api/data/${id}`, fetcher, { refreshInterval: 1, revalidateIfStale: true, dedupingInterval: 1 })
+  return {
+    returndata: data,
+    isLoading: !error && !data,
+    isError: error
+  }
+}
 
-  // resolve test
-  console.warn("test is", test);
- 
+function ReturnAPITest() {
+  const { returndata, isLoading, isError } = GetData("acceleration")
+  if (isError) return <div>failed to load </div>
+  if (!returndata) return <div>loading...</div>
+  return <div>{returndata.message}</div>
+}
+
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -25,9 +43,8 @@ export default async function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <p>
-        {test}
-      </p>
+      <ReturnAPITest />
+
     </div>
   )
 }
