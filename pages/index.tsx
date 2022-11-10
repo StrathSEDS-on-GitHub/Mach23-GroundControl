@@ -1,5 +1,8 @@
+import React from 'react'
 import Head from 'next/head'
+import CreateModal from '../components/Modal'
 import useSWR from 'swr'
+import Header from '../components/Header'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { readSync } from 'fs'
@@ -35,8 +38,10 @@ function ReturnAPITest() {
 }
 
 export default function Home() {
+  
   return (
     <div className={styles.container}>
+      <Header />
       <Head>
         <title>M23-GC</title>
         <meta name="description" content="StrathSEDS Mach23 Competition Ground Control" />
@@ -44,6 +49,9 @@ export default function Home() {
       </Head>
 
       <ReturnAPITest />
+
+      <div id="example"></div>
+      <CreateModal></CreateModal>
 
     </div>
   )
