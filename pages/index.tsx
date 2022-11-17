@@ -22,7 +22,7 @@ const fetcher = async (url: string) => {
 }
 
 function GetData(id: string) {
-  const { data, error } = useSWR(`/api/data/${id}`, fetcher, { refreshInterval: 1, revalidateIfStale: true, dedupingInterval: 1 })
+  const { data, error } = useSWR(`/api/data/${id}`, fetcher, { refreshInterval: 5, revalidateIfStale: false, dedupingInterval: 5 })
   return {
     returndata: data,
     isLoading: !error && !data,
@@ -31,10 +31,17 @@ function GetData(id: string) {
 }
 
 function ReturnAPITest() {
-  const { returndata, isLoading, isError } = GetData("acceleration")
+  const { returndata, isLoading, isError } = GetData("velocity")
   if (isError) return <div>failed to load </div>
   if (!returndata) return <div>loading...</div>
   return <div>{returndata.message}</div>
+}
+
+function MissionTimer(){
+  const { returndata, isLoading, isError } = GetData("timer")
+  if (isError) return <div>failed to load timer</div>
+  if (!returndata) return <div>waiting for timer...</div>
+  
 }
 
 export default function Home() {

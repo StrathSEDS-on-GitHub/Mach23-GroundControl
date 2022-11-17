@@ -8,24 +8,28 @@ type Data = {
 
 const CurrentData = {
   acceleration: 0,
-  speed: 0,
+  velocity: 0,
   altitude: 0,
   time: 0,
   GPS: null,
 
-  set SetAcceleration(value: number): void {
-    assert
+  set SetAcceleration(value: number) {
     this.acceleration = value
   },
 
-  set SetSpeed(value: number): void {
-    assert(value >= 0, 'Speed cannot be negative');
-    this.speed = value
+  set SetVelocity(value: number) {
+    assert(value >= 0, 'velocity cannot be negative');
+    this.velocity = value
+  },
+
+  get GetAcceleration(): number {
+    return this.acceleration
+  },
+
+  get GetVelocity(): number {
+    return this.velocity
   }
 }
-
-const DataKey = ["velocity", "acceleration"];
-
 const now = Date.now()
 
 export default function handler(
@@ -34,12 +38,18 @@ export default function handler(
 ) {
 
   const { id } = req.query
-  let currenttime: number = Math.floor((Date.now() - now)/100)/10;
+  let currenttime: number = Math.floor((Date.now() - now)/10)/100;
 
   let value = "NO DATA";
 
   switch (id) {
     case "velocity":
+      value = CurrentData.GetVelocity.toString();
+      break;
+  default:
+    value = "INVALID ID";
+    break;
+  }
 
   res.status(200).json({ message: `(${currenttime}) ${id}: ${value}` });
 }
