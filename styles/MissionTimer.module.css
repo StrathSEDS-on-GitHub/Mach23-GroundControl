@@ -3,8 +3,8 @@
     height: 50px;
     display:inline-flex;
     position: absolute; 
-    left: 76vw;
-    margin-top: 1.5em;
+    top: 3.5vh;
+    left: 97vw;
     transform: translateX(-100%);
     z-index: 2;
     border: 1px rgba(204, 203, 203, 0.555) solid;;

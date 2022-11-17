@@ -22,7 +22,7 @@ const fetcher = async (url: string) => {
 }
 
 function GetData(id: string) {
-  const { data, error } = useSWR(`/api/data/${id}`, fetcher, { refreshInterval: 5, revalidateIfStale: false, dedupingInterval: 5 })
+  const { data, error } = useSWR(`/api/data/${id}`, fetcher, { refreshInterval: 25, revalidateIfStale: false, dedupingInterval: 25 })
   return {
     returndata: data,
     isLoading: !error && !data,
@@ -41,25 +41,28 @@ function MissionTimer(){
   const { returndata, isLoading, isError } = GetData("timer")
   if (isError) return <div>failed to load timer</div>
   if (!returndata) return <div>waiting for timer...</div>
-  
+
 }
 
 export default function Home() {
   
   return (
     <div className={styles.container}>
-      <Header />
       <Head>
         <title>M23-GC</title>
         <meta name="description" content="StrathSEDS Mach23 Competition Ground Control" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ReturnAPITest />
+      {/* Modal container */}
+      <div id="modalcontainer"></div>
 
-      <div id="example"></div>
-      <CreateModal></CreateModal>
+      {/* Header section and data init*/}
+      <Header />
+      {/* <ReturnAPITest /> */}
 
+
+      {/* <CreateModal></CreateModal> */}
     </div>
   )
 }

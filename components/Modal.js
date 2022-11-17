@@ -1,8 +1,7 @@
 import Modal from 'react-modal'
 import React from 'react'
 
-Modal.setAppElement('#example');
-
+Modal.setAppElement('#modalcontainer');
 
 const centerelement = {
   content: {
@@ -24,7 +23,6 @@ function CreateModal() {
   }
 
   function afterOpenModal() {
-    // references are now sync'd and can be accessed.
     subtitle.style.color = '#f00';
   }
 
@@ -33,7 +31,7 @@ function CreateModal() {
   }
   return (
       <div>
-          <button onClick={openModal}>Open </button>
+          <button onClick={openModal}>Open</button>
           <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -41,12 +39,12 @@ function CreateModal() {
           style={centerelement}
           contentLabel="Alert"
           >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>subtitle</h2>
           <button onClick={closeModal}>Continue</button>
           <div>This is an alert</div>
           <form>
               <input />
-              <button>Ohter button</button>
+              <button>Context button</button>
           </form>
           </Modal>
       </div>

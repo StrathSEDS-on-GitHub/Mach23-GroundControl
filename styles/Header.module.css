@@ -1,0 +1,26 @@
+.header {
+  height: 15vh;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.465);
+  background-image:linear-gradient(to bottom right, rgba(52, 69, 77, 0.2), rgba(27, 35, 38, 0));
+  backdrop-filter: "blur(10px)"; 
+  box-shadow: 10px 10px 10px rgba(30,30,30,0.5);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.title {
+  padding: 0;
+  padding-left: 3vh;
+  padding-bottom: 1vh;
+  margin: 0;
+}
+.subtitle {
+  padding: 0;
+  padding-left: 3vh;
+  margin: 0;
+  color: darkgrey;
+  font-size: small;
+}

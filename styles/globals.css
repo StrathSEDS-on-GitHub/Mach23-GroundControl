@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('../font/inconsolata.ttf') format('truetype');
+}  
+
 html,
 body {
   padding: 0;
@@ -20,7 +25,7 @@ a {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: rgba(255, 255, 255, 0.894);
+    background: rgb(25, 25, 25);
   }
 }
