@@ -12,8 +12,9 @@ const CurrentData = {
   velocity: 0,
   altitude: 0,
   time: 0,
-  GPS: null,
+  gps: null,
 
+  // Sets
   set SetAcceleration(value: number) {
     this.acceleration = value
   },
@@ -23,12 +24,17 @@ const CurrentData = {
     this.velocity = value
   },
 
+  // Gets
   get GetAcceleration(): number {
     return this.acceleration
   },
 
   get GetVelocity(): number {
     return this.velocity
+  },
+
+  get GetMissionTimeStart(): number {
+    return this.missionstarttime
   }
 }
 
@@ -46,9 +52,9 @@ export default function handler(
       value = CurrentData.GetVelocity;
       break;
     case 'missiontime':
-      value = Date.now() - CurrentData.missionstarttime;
+      value = Date.now() - CurrentData.GetMissionTimeStart;
       break
-      
+
     default:
       value = "INVALID ID";
       break;
