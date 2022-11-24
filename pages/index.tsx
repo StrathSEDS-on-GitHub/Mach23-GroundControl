@@ -1,34 +1,12 @@
 import React from 'react'
 import Head from 'next/head'
 import CreateModal from '../components/Modal'
-import useSWR from 'swr'
 import Header from '../components/Header'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { readSync } from 'fs'
 
-const dataapi = "localhost:3000/api/test"
-
-const fetcher = async (url: string) => {
-  const res = await fetch(url)
-
-  if (!res.ok) {
-    console.log("API> Error: " + res.statusText)
-    const error = new Error(res.statusText);
-    throw error;
-  }
-
-  return res.json();
-}
-
-function GetData(id: string) {
-  const { data, error } = useSWR(`/api/data/${id}`, fetcher, { refreshInterval: 25, revalidateIfStale: false, dedupingInterval: 25 })
-  return {
-    returndata: data,
-    isLoading: !error && !data,
-    isError: error
-  }
-}
+import GetData from '../components/GetData'
 
 function ReturnAPITest() {
   const { returndata, isLoading, isError } = GetData("velocity")
@@ -59,6 +37,7 @@ export default function Home() {
 
       {/* Header section and data init*/}
       <Header />
+
       {/* <ReturnAPITest /> */}
 
 

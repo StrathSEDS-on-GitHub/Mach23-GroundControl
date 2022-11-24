@@ -6,7 +6,6 @@ function Header() {
         <div className={styles.header}>
             <h1 className={styles.title}>GROUND CONTROL</h1>
             <h2 className={styles.subtitle}>MACH 23 - RF MAGIC</h2>
-
             <MissionTimer />
         </div>
     );

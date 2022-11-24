@@ -7,7 +7,8 @@ type Data = {
 }
 
 const CurrentData = {
-  acceleration: 0,
+  missionstarttime: 0,
+  acceleration: 123,
   velocity: 0,
   altitude: 0,
   time: 0,
@@ -30,7 +31,6 @@ const CurrentData = {
     return this.velocity
   }
 }
-const now = Date.now()
 
 export default function handler(
   req: NextApiRequest,
@@ -38,18 +38,21 @@ export default function handler(
 ) {
 
   const { id } = req.query
-  let currenttime: number = Math.floor((Date.now() - now)/10)/100;
 
-  let value = "NO DATA";
+  let value: string | number = "NO DATA";
 
   switch (id) {
     case "velocity":
-      value = CurrentData.GetVelocity.toString();
+      value = CurrentData.GetVelocity;
       break;
-  default:
-    value = "INVALID ID";
-    break;
+    case 'missiontime':
+      value = Date.now() - CurrentData.missionstarttime;
+      break
+      
+    default:
+      value = "INVALID ID";
+      break;
   }
 
-  res.status(200).json({ message: `(${currenttime}) ${id}: ${value}` });
+  res.status(200).json({ message: value.toString() });
 }
